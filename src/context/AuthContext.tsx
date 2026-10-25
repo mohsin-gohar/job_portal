@@ -29,10 +29,24 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const STORAGE_KEY = 'lumina_auth_user';
 
 // Predefined administrator accounts
-const ADMIN_EMAILS = ['admin@lumina.careers', 'admin@shopsphere.studio'];
-const ADMIN_PASSWORDS = ['admin123', 'admin2026'];
+const ADMIN_CREDENTIALS: ReadonlyArray<{ email: string; passwordHash: string }> = [
+  { email: 'admin@lumina.careers', passwordHash: '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9' },
+  { email: 'admin@shopsphere.studio', passwordHash: '6051fc84a7a0d74c225fb18a496b09952da5642e60723ecae543298edd7d82d6' },
+];
 
 const VALID_ROLES: UserRole[] = ['candidate', 'employer', 'admin'];
+
+async function sha256Hex(value: string): Promise<string> {
+  if (typeof crypto === 'undefined' || !crypto.subtle) {
+    // Fallback for non-secure contexts; never used in production HTTPS.
+    return value;
+  }
+  const data = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
 
 function isAuthUser(value: unknown): value is AuthUser {
   if (!value || typeof value !== 'object') return false;
@@ -60,7 +74,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const parsed = JSON.parse(raw);
         if (isAuthUser(parsed)) {
           // Never restore an admin session unless the email is still allow-listed.
-          if (parsed.role === 'admin' && !ADMIN_EMAILS.includes(parsed.email)) {
+          if (parsed.role === 'admin' && !ADMIN_CREDENTIALS.some((c) => c.email === parsed.email)) {
             localStorage.removeItem(STORAGE_KEY);
           } else {
             setUser(parsed);
@@ -91,10 +105,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return { success: false, error: 'Email and password are required' };
     }
 
-    // 1. Check for Admin Login (Secret entry)
-    const isAdminEmail = ADMIN_EMAILS.includes(cleanEmail);
-    if (isAdminEmail) {
-      if (ADMIN_PASSWORDS.includes(cleanPw)) {
+    // 1. Check for Admin Login (allow-listed, password hash verified)
+    const adminCredential = ADMIN_CREDENTIALS.find((c) => c.email === cleanEmail);
+    if (adminCredential) {
+      const enteredHash = await sha256Hex(cleanPw);
+      if (enteredHash === adminCredential.passwordHash) {
         const adminUser: AuthUser = {
           id: 'admin_root',
           name: 'Platform Administrator',
@@ -105,9 +120,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(adminUser);
         persist(adminUser);
         return { success: true, role: 'admin' };
-      } else {
-        return { success: false, error: 'Invalid security credentials for this account' };
       }
+      return { success: false, error: 'Invalid security credentials for this account' };
     }
 
     // 2. Regular Candidate or Employer Login

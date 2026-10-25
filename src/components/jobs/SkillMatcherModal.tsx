@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { X, Sparkles, Check, RotateCcw } from 'lucide-react';
 import { useCandidate, POPULAR_TECH_SKILLS } from '../../context/CandidateContext';
 
@@ -9,6 +10,8 @@ interface SkillMatcherModalProps {
 
 export const SkillMatcherModal: React.FC<SkillMatcherModalProps> = ({ isOpen, onClose }) => {
   const { candidateSkills, toggleCandidateSkill, clearCandidateSkills } = useCandidate();
+  const modalRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(isOpen, modalRef);
 
   if (!isOpen) return null;
 
@@ -16,9 +19,11 @@ export const SkillMatcherModal: React.FC<SkillMatcherModalProps> = ({ isOpen, on
     <div
       role="dialog"
       aria-modal="true"
+      aria-labelledby="skill-matcher-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs"
     >
       <div
+        ref={modalRef}
         className="bg-white rounded-lg border border-slate-200 shadow-xl w-full max-w-lg p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
@@ -29,7 +34,7 @@ export const SkillMatcherModal: React.FC<SkillMatcherModalProps> = ({ isOpen, on
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
               <span>Interactive Skill Matcher</span>
             </div>
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 id="skill-matcher-title" className="text-base font-bold text-slate-900">
               Select Your Tech Stack & Proficiencies
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">

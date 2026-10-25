@@ -73,7 +73,7 @@ export const CompanyDetailPage: React.FC = () => {
 
   return (
     <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" alt="" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-[0.12] -z-10" />
+      <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.12] -z-10" />
       {/* Back button */}
       <Link
         to="/companies"

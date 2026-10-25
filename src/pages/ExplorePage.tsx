@@ -86,7 +86,7 @@ export const ExplorePage: React.FC = () => {
       <section className="relative pt-12 pb-10 px-4 sm:px-6 lg:px-8 border-b border-slate-200/90 overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0 -z-10">
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80"
             alt=""
             className="w-full h-full object-cover object-center opacity-20"
@@ -381,6 +381,7 @@ export const ExplorePage: React.FC = () => {
           role="dialog"
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/60 backdrop-blur-xs lg:hidden"
+          onClick={() => setMobileFiltersOpen(false)}
         >
           <div
             className="w-full max-w-lg bg-white rounded-t-2xl sm:rounded-2xl max-h-[85vh] overflow-y-auto p-5"

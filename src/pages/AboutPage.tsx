@@ -29,7 +29,7 @@ export const AboutPage: React.FC = () => {
       <section className="relative pt-18 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 overflow-hidden">
         {/* Background Architectural Image */}
         <div className="absolute inset-0 -z-10">
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=80"
             alt=""
             className="w-full h-full object-cover object-center opacity-30"
@@ -97,7 +97,7 @@ export const AboutPage: React.FC = () => {
           </div>
           <div className="relative">
             <div className="aspect-[4/3] rounded-3xl bg-slate-900 border border-slate-800 shadow-card flex items-center justify-center overflow-hidden relative">
-              <img
+              <img loading="lazy" decoding="async"
                 src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
                 alt=""
                 className="absolute inset-0 w-full h-full object-cover opacity-20"
@@ -115,7 +115,7 @@ export const AboutPage: React.FC = () => {
       <section className="px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="rounded-3xl overflow-hidden shadow-card-hover">
-            <img src="https://images.unsplash.com/photo-1552664730-d307ca884992?auto=format&fit=crop&w=1200&q=80" alt="Our story" loading="lazy" decoding="async" className="w-full h-80 object-cover" />
+            <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1552664730-d307ca884992?auto=format&fit=crop&w=1200&q=80" alt="Our story" className="w-full h-80 object-cover" />
           </div>
           <div className="space-y-4">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">Our story</span>

@@ -30,10 +30,10 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage').then((m) => ({ de
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 const PageFallback = () => (
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex items-center justify-center">
-    <div className="flex items-center gap-3 text-sm text-slate-500">
-      <span className="w-4 h-4 border-2 border-slate-300 border-t-slate-900 rounded-full animate-spin" />
-      <span>Loading...</span>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="max-w-md mx-auto text-center space-y-4">
+      <div className="w-10 h-10 mx-auto rounded-full border-2 border-slate-200 border-t-slate-900 animate-spin" />
+      <p className="text-sm text-slate-500">Loading page…</p>
     </div>
   </div>
 );

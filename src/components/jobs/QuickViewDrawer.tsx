@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { Link } from 'react-router-dom';
 import { X, Bookmark, ArrowUpRight, CheckCircle2, Building, Globe, Users, Clock, Sparkles } from 'lucide-react';
 import { Job } from '../../types/job';
@@ -17,6 +18,8 @@ export const QuickViewDrawer: React.FC<QuickViewDrawerProps> = ({ job, onClose, 
   const { isSaved, toggleSaveJob } = useSavedJobs();
   const { calculateJobMatchScore } = useCandidate();
   const { hasApplied } = useApplication();
+  const drawerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(!!job, drawerRef);
 
   if (!job) return null;
 
@@ -33,9 +36,12 @@ export const QuickViewDrawer: React.FC<QuickViewDrawerProps> = ({ job, onClose, 
     <div
       role="dialog"
       aria-modal="true"
+      aria-labelledby="quick-view-title"
       className="fixed inset-0 z-50 overflow-hidden bg-slate-900/50 backdrop-blur-2xs flex justify-end"
+      onClick={onClose}
     >
       <div
+        ref={drawerRef}
         className="w-full max-w-xl bg-white h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-200"
         onClick={(e) => e.stopPropagation()}
       >
@@ -61,7 +67,7 @@ export const QuickViewDrawer: React.FC<QuickViewDrawerProps> = ({ job, onClose, 
                     </>
                   )}
                 </div>
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-snug">
+                <h2 id="quick-view-title" className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-snug">
                   {job.title}
                 </h2>
               </div>

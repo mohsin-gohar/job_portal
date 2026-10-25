@@ -113,7 +113,7 @@ export const PostJobPage: React.FC = () => {
     <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       <div className="relative bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-soft overflow-hidden">
         <div className="absolute top-0 inset-x-0 h-32 pointer-events-none overflow-hidden">
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=80"
             alt=""
             className="w-full h-full object-cover object-center opacity-25"
@@ -153,12 +153,14 @@ export const PostJobPage: React.FC = () => {
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="e.g. Senior Backend Engineer"
+              aria-invalid={!!errors.title}
+              aria-describedby={errors.title ? 'postjob-title-error' : undefined}
               className={`w-full px-3 py-2 text-xs bg-white border rounded-md text-slate-900 focus:outline-hidden ${
                 errors.title ? 'border-rose-400' : 'border-slate-200 focus:border-slate-800'
               }`}
             />
             {errors.title && (
-              <p className="text-xs text-rose-600 mt-1 flex items-center gap-1">
+              <p id="postjob-title-error" className="text-xs text-rose-600 mt-1 flex items-center gap-1">
                 <AlertCircle className="w-3 h-3" /> {errors.title}
               </p>
             )}
@@ -174,12 +176,14 @@ export const PostJobPage: React.FC = () => {
               value={form.company}
               onChange={(e) => setForm({ ...form, company: e.target.value })}
               placeholder="e.g. Stripe, Linear"
+              aria-invalid={!!errors.company}
+              aria-describedby={errors.company ? 'postjob-company-error' : undefined}
               className={`w-full px-3 py-2 text-xs bg-white border rounded-md text-slate-900 focus:outline-hidden ${
                 errors.company ? 'border-rose-400' : 'border-slate-200 focus:border-slate-800'
               }`}
             />
             {errors.company && (
-              <p className="text-xs text-rose-600 mt-1 flex items-center gap-1">
+              <p id="postjob-company-error" className="text-xs text-rose-600 mt-1 flex items-center gap-1">
                 <AlertCircle className="w-3 h-3" /> {errors.company}
               </p>
             )}

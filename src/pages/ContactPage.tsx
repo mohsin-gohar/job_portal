@@ -66,7 +66,7 @@ export const ContactPage: React.FC = () => {
       <section className="relative pt-16 pb-14 px-4 sm:px-6 lg:px-8 border-b border-slate-200/90 overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0 -z-10">
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=80"
             alt=""
             className="w-full h-full object-cover object-center opacity-20"
@@ -190,46 +190,53 @@ export const ContactPage: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
+                    <label htmlFor="contact-name" className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
                       Your Full Name
                     </label>
                     <input
                       type="text"
+                      id="contact-name"
                       name="name"
                       value={form.name}
                       onChange={handleChange}
                       placeholder="e.g. Alex Vance"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? 'contact-name-error' : undefined}
                       className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:bg-white transition-all ${
                         errors.name ? 'border-rose-400 focus:border-rose-500' : 'border-slate-200 focus:border-slate-400'
                       }`}
                     />
-                    {errors.name && <p className="text-[11px] text-rose-600 mt-1">{errors.name}</p>}
+                    {errors.name && <p id="contact-name-error" role="alert" className="text-[11px] text-rose-600 mt-1">{errors.name}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
+                    <label htmlFor="contact-email" className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
                       Work or Personal Email
                     </label>
                     <input
                       type="email"
+                      id="contact-email"
                       name="email"
                       value={form.email}
                       onChange={handleChange}
                       placeholder="alex@company.com"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? 'contact-email-error' : undefined}
                       className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:bg-white transition-all ${
                         errors.email ? 'border-rose-400 focus:border-rose-500' : 'border-slate-200 focus:border-slate-400'
                       }`}
                     />
-                    {errors.email && <p className="text-[11px] text-rose-600 mt-1">{errors.email}</p>}
+                    {errors.email && <p id="contact-email-error" role="alert" className="text-[11px] text-rose-600 mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
+                    <label htmlFor="contact-category" className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
                       Inquiry Category
                     </label>
                     <select
+                      id="contact-category"
                       name="category"
                       value={form.category}
                       onChange={handleChange}
@@ -243,38 +250,44 @@ export const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
+                    <label htmlFor="contact-subject" className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
                       Subject
                     </label>
                     <input
                       type="text"
+                      id="contact-subject"
                       name="subject"
                       value={form.subject}
                       onChange={handleChange}
                       placeholder="Brief summary of your inquiry..."
+                      aria-invalid={!!errors.subject}
+                      aria-describedby={errors.subject ? 'contact-subject-error' : undefined}
                       className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:bg-white transition-all ${
                         errors.subject ? 'border-rose-400 focus:border-rose-500' : 'border-slate-200 focus:border-slate-400'
                       }`}
                     />
-                    {errors.subject && <p className="text-[11px] text-rose-600 mt-1">{errors.subject}</p>}
+                    {errors.subject && <p id="contact-subject-error" role="alert" className="text-[11px] text-rose-600 mt-1">{errors.subject}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
+                  <label htmlFor="contact-message" className="block text-xs font-bold text-slate-900 mb-1.5 uppercase tracking-wider">
                     Detailed Message
                   </label>
                   <textarea
                     rows={5}
+                    id="contact-message"
                     name="message"
                     value={form.message}
                     onChange={handleChange}
                     placeholder="Tell us about your team's hiring roadmap, technical questions, or candidate inquiry..."
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? 'contact-message-error' : undefined}
                     className={`w-full px-4 py-3 bg-slate-50 border rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:bg-white transition-all leading-relaxed ${
                       errors.message ? 'border-rose-400 focus:border-rose-500' : 'border-slate-200 focus:border-slate-400'
                     }`}
                   />
-                  {errors.message && <p className="text-[11px] text-rose-600 mt-1">{errors.message}</p>}
+                  {errors.message && <p id="contact-message-error" role="alert" className="text-[11px] text-rose-600 mt-1">{errors.message}</p>}
                 </div>
 
                 <div className="pt-2">

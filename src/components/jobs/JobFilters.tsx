@@ -238,7 +238,7 @@ export const JobFilters: React.FC<JobFiltersProps> = ({ onCloseMobile, className
           <button
             type="button"
             onClick={onCloseMobile}
-            className="w-full py-2.5 text-xs font-semibold text-white bg-indigo-600 rounded-md hover:bg-slate-800 transition-colors"
+            className="w-full py-2.5 text-xs font-semibold text-white bg-slate-950 rounded-xl hover:bg-slate-800 transition-colors shadow-xs"
           >
             Apply Filters
           </button>

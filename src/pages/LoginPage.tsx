@@ -129,6 +129,7 @@ export const LoginPage: React.FC = () => {
                       : 'developer@example.com'
                   }
                   required
+                  autoComplete="email"
                   className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-slate-400 focus:ring-3 focus:ring-slate-950/5 transition-all"
                 />
               </div>
@@ -156,6 +157,7 @@ export const LoginPage: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
                   required
+                  autoComplete="current-password"
                   className="w-full pl-10 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-slate-400 focus:ring-3 focus:ring-slate-950/5 transition-all"
                 />
                 <button
@@ -200,7 +202,7 @@ export const LoginPage: React.FC = () => {
 
       {/* Right Column: Architectural Editorial Showcase */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-slate-900 overflow-hidden items-end p-12 text-white">
-        <img
+        <img loading="lazy" decoding="async"
           src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80"
           alt="Modern Architectural Headquarters"
           className="absolute inset-0 w-full h-full object-cover opacity-25"

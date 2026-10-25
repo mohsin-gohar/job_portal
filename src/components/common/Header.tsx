@@ -1,4 +1,5 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect, useRef } from 'react';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Bookmark,
@@ -35,8 +36,15 @@ export const Header = memo(() => {
   const { user, isAuthenticated, logout } = useAuth();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(mobileMenuOpen, mobileMenuRef);
   const [skillMatcherOpen, setSkillMatcherOpen] = useState(false);
   const [alertModalOpen, setAlertModalOpen] = useState(false);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
@@ -333,6 +341,8 @@ export const Header = memo(() => {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 text-slate-600 hover:text-slate-900 focus:outline-hidden"
                 aria-label="Toggle navigation menu"
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-navigation"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -342,7 +352,7 @@ export const Header = memo(() => {
 
         {/* Mobile Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2.5">
+          <div id="mobile-navigation" ref={mobileMenuRef} className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2.5">
             <Link
               to="/"
               onClick={() => setMobileMenuOpen(false)}

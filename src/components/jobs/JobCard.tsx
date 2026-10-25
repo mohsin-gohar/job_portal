@@ -13,7 +13,7 @@ interface JobCardProps {
   onSkillClick?: (skill: string) => void;
 }
 
-export const JobCard: React.FC<JobCardProps> = ({
+export const JobCard = React.memo<JobCardProps>(({
   job,
   onApplyClick,
   onQuickViewClick,
@@ -234,4 +234,4 @@ export const JobCard: React.FC<JobCardProps> = ({
       </div>
     </article>
   );
-};
+});

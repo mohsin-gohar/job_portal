@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 import { Job } from '../types/job';
 import { getStoredJobs } from '../services/api';
 import { useToast } from './ToastContext';
@@ -62,8 +62,8 @@ export const SavedJobsProvider: React.FC<{ children: ReactNode }> = ({ children 
     showToast('Saved jobs cleared', 'info');
   }, [showToast]);
 
-  const allJobs = getStoredJobs();
-  const savedJobs = allJobs.filter((j) => savedJobIds.includes(j.id));
+  const allJobs = useMemo(() => getStoredJobs(), []);
+  const savedJobs = useMemo(() => allJobs.filter((j) => savedJobIds.includes(j.id)), [allJobs, savedJobIds]);
 
   return (
     <SavedJobsContext.Provider

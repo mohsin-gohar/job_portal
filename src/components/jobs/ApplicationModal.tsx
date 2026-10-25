@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { X, Upload, CheckCircle2, FileText, AlertCircle, Loader2 } from 'lucide-react';
 import { Job } from '../../types/job';
 import { useApplication } from '../../context/ApplicationContext';
@@ -37,6 +38,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   onClose,
 }) => {
   const { submitApplication } = useApplication();
+  const modalRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(isOpen, modalRef);
 
   const [values, setValues] = useState<FormValues>({
     fullName: '',
@@ -232,8 +235,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
       aria-modal="true"
       aria-labelledby="modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-slate-900/60 backdrop-blur-xs"
+      onClick={() => { if (!isSubmitting) onClose(); }}
     >
       <div
+        ref={modalRef}
         className="relative bg-white rounded-lg border border-slate-200 shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
@@ -319,6 +324,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   onChange={(e) => handleChange('fullName', e.target.value)}
                   onBlur={() => handleBlur('fullName')}
                   placeholder="e.g. Elena Rostova"
+                  aria-invalid={!!(errors.fullName && touched.fullName)}
+                  aria-describedby={errors.fullName && touched.fullName ? 'fullName-error' : undefined}
                   className={`w-full px-3 py-2 text-xs bg-white border rounded-md text-slate-900 placeholder:text-slate-400 focus:outline-hidden transition-colors ${
                     errors.fullName && touched.fullName
                       ? 'border-rose-400 focus:border-rose-500'
@@ -326,7 +333,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   }`}
                 />
                 {errors.fullName && touched.fullName && (
-                  <p className="mt-1 text-xs text-rose-600 flex items-center gap-1">
+                  <p id="fullName-error" className="mt-1 text-xs text-rose-600 flex items-center gap-1">
                     <AlertCircle className="w-3 h-3 shrink-0" />
                     <span>{errors.fullName}</span>
                   </p>
@@ -346,6 +353,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     onChange={(e) => handleChange('email', e.target.value)}
                     onBlur={() => handleBlur('email')}
                     placeholder="elena@example.com"
+                    aria-invalid={!!(errors.email && touched.email)}
+                    aria-describedby={errors.email && touched.email ? 'email-error' : undefined}
                     className={`w-full px-3 py-2 text-xs bg-white border rounded-md text-slate-900 placeholder:text-slate-400 focus:outline-hidden transition-colors ${
                       errors.email && touched.email
                         ? 'border-rose-400 focus:border-rose-500'
@@ -353,7 +362,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     }`}
                   />
                   {errors.email && touched.email && (
-                    <p className="mt-1 text-xs text-rose-600 flex items-center gap-1">
+                    <p id="email-error" className="mt-1 text-xs text-rose-600 flex items-center gap-1">
                       <AlertCircle className="w-3 h-3 shrink-0" />
                       <span>{errors.email}</span>
                     </p>
@@ -371,6 +380,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     onChange={(e) => handleChange('phone', e.target.value)}
                     onBlur={() => handleBlur('phone')}
                     placeholder="+1 (555) 019-2834"
+                    aria-invalid={!!(errors.phone && touched.phone)}
+                    aria-describedby={errors.phone && touched.phone ? 'phone-error' : undefined}
                     className={`w-full px-3 py-2 text-xs bg-white border rounded-md text-slate-900 placeholder:text-slate-400 focus:outline-hidden transition-colors ${
                       errors.phone && touched.phone
                         ? 'border-rose-400 focus:border-rose-500'
@@ -378,7 +389,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     }`}
                   />
                   {errors.phone && touched.phone && (
-                    <p className="mt-1 text-xs text-rose-600 flex items-center gap-1">
+                    <p id="phone-error" className="mt-1 text-xs text-rose-600 flex items-center gap-1">
                       <AlertCircle className="w-3 h-3 shrink-0" />
                       <span>{errors.phone}</span>
                     </p>

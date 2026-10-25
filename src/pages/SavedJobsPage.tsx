@@ -40,7 +40,7 @@ export const SavedJobsPage: React.FC = () => {
       {/* Top Header Card */}
       <div className="relative bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-soft overflow-hidden">
         <div className="absolute top-0 inset-x-0 h-32 pointer-events-none overflow-hidden">
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=80"
             alt=""
             className="w-full h-full object-cover object-center opacity-25"

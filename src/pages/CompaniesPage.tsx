@@ -42,7 +42,7 @@ export const CompaniesPage: React.FC = () => {
       <section className="relative border-b border-slate-200/80 pt-12 pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background Architectural Image */}
         <div className="absolute inset-0 -z-10">
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80"
             alt=""
             className="w-full h-full object-cover object-center opacity-30"

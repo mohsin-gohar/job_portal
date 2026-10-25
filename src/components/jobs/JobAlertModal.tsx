@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { X, Bell, CheckCircle2 } from 'lucide-react';
 import { useCandidate } from '../../context/CandidateContext';
 
@@ -21,6 +22,8 @@ export const JobAlertModal: React.FC<JobAlertModalProps> = ({
   const [frequency, setFrequency] = useState<'Daily' | 'Weekly'>('Daily');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const modalRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(isOpen, modalRef);
 
   if (!isOpen) return null;
 
@@ -50,9 +53,11 @@ export const JobAlertModal: React.FC<JobAlertModalProps> = ({
     <div
       role="dialog"
       aria-modal="true"
+      aria-labelledby="job-alert-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs"
     >
       <div
+        ref={modalRef}
         className="bg-white rounded-lg border border-slate-200 shadow-xl w-full max-w-md p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
@@ -63,7 +68,7 @@ export const JobAlertModal: React.FC<JobAlertModalProps> = ({
               <Bell className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-900">Create Job Alert</h3>
+              <h3 id="job-alert-title" className="text-base font-bold text-slate-900">Create Job Alert</h3>
               <p className="text-xs text-slate-500">Get notified when new matching roles launch</p>
             </div>
           </div>
