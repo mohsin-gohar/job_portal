@@ -20,7 +20,7 @@ export const RegisterPage: React.FC = () => {
     e.preventDefault();
     setError('');
     if (!name.trim()) { setError('Please enter your full name.'); return; }
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email.trim())) { setError('Please enter a valid email address.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { setError('Please enter a valid email address.'); return; }
     if (password.trim().length < 8) { setError('Password must be at least 8 characters long.'); return; }
     setLoading(true);
     const ok = await register(name, email, password, role);

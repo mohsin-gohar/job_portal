@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 import {
   getStoredJobs,
   getStoredCompanies,
@@ -113,6 +114,27 @@ export const AdminDashboardPage: React.FC = () => {
   const [jobToDelete, setJobToDelete] = useState<Job | null>(null);
   const [resetModalOpen, setResetModalOpen] = useState(false);
   const [testingWebhook, setTestingWebhook] = useState(false);
+  
+  // Focus trap and Escape handlers for modals
+  const jobToDeleteRef = useRef<HTMLDivElement>(null);
+  const resetModalRef = useRef<HTMLDivElement>(null);
+  const testingWebhookRef = useRef<HTMLDivElement>(null);
+  
+  const { focusTrap: jobToDeleteFocusTrap, isActive: jobToDeleteFocusActive } = useFocusTrap(jobToDeleteRef);
+  const { focusTrap: resetModalFocusTrap, isActive: resetModalFocusActive } = useFocusTrap(resetModalRef);
+  const { focusTrap: testingWebhookFocusTrap, isActive: testingWebhookFocusActive } = useFocusTrap(testingWebhookRef);
+  
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setJobToDelete(null);
+        setResetModalOpen(false);
+        setTestingWebhook(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, []);
 
   // Load initial data
   const refreshData = () => {
@@ -846,6 +868,8 @@ export const AdminDashboardPage: React.FC = () => {
                     value={settings.siteName}
                     onChange={(e) => setSettings({ ...settings, siteName: e.target.value })}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 font-semibold focus:outline-hidden focus:border-slate-400 focus:bg-white transition-all"
+                    aria-invalid={settings.siteName.trim() === ''}
+                    is-invalid={settings.siteName.trim() === ''}
                   />
                 </div>
 
@@ -858,6 +882,8 @@ export const AdminDashboardPage: React.FC = () => {
                     value={settings.supportEmail}
                     onChange={(e) => setSettings({ ...settings, supportEmail: e.target.value })}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 font-semibold focus:outline-hidden focus:border-slate-400 focus:bg-white transition-all"
+                    aria-invalid={settings.supportEmail.trim() === ''}
+                    is-invalid={settings.supportEmail.trim() === ''}
                   />
                 </div>
 
@@ -870,6 +896,8 @@ export const AdminDashboardPage: React.FC = () => {
                     value={settings.tagline}
                     onChange={(e) => setSettings({ ...settings, tagline: e.target.value })}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 font-semibold focus:outline-hidden focus:border-slate-400 focus:bg-white transition-all"
+                    aria-invalid={settings.tagline.trim() === ''}
+                    is-invalid={settings.tagline.trim() === ''}
                   />
                 </div>
               </div>

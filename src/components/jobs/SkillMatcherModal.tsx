@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { X, Sparkles, Check, RotateCcw } from 'lucide-react';
 import { useCandidate, POPULAR_TECH_SKILLS } from '../../context/CandidateContext';
@@ -13,6 +13,15 @@ export const SkillMatcherModal: React.FC<SkillMatcherModalProps> = ({ isOpen, on
   const modalRef = useRef<HTMLDivElement>(null);
   useFocusTrap(isOpen, modalRef);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -21,10 +30,11 @@ export const SkillMatcherModal: React.FC<SkillMatcherModalProps> = ({ isOpen, on
       aria-modal="true"
       aria-labelledby="skill-matcher-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs"
+      onClick={onClose}
     >
       <div
         ref={modalRef}
-        className="bg-white rounded-lg border border-slate-200 shadow-xl w-full max-w-lg p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150"
+        className="bg-white rounded-2xl border border-slate-200 shadow-xl w-full max-w-lg p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

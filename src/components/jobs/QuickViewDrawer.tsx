@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { Link } from 'react-router-dom';
 import { X, Bookmark, ArrowUpRight, CheckCircle2, Building, Globe, Users, Clock, Sparkles } from 'lucide-react';
@@ -20,6 +20,15 @@ export const QuickViewDrawer: React.FC<QuickViewDrawerProps> = ({ job, onClose, 
   const { hasApplied } = useApplication();
   const drawerRef = useRef<HTMLDivElement>(null);
   useFocusTrap(!!job, drawerRef);
+
+  useEffect(() => {
+    if (!job) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [job, onClose]);
 
   if (!job) return null;
 

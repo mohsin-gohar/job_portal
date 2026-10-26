@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { X, Bell, CheckCircle2 } from 'lucide-react';
 import { useCandidate } from '../../context/CandidateContext';
@@ -24,6 +24,15 @@ export const JobAlertModal: React.FC<JobAlertModalProps> = ({
   const [error, setError] = useState('');
   const modalRef = useRef<HTMLDivElement>(null);
   useFocusTrap(isOpen, modalRef);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -55,6 +64,7 @@ export const JobAlertModal: React.FC<JobAlertModalProps> = ({
       aria-modal="true"
       aria-labelledby="job-alert-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs"
+      onClick={onClose}
     >
       <div
         ref={modalRef}
@@ -75,6 +85,7 @@ export const JobAlertModal: React.FC<JobAlertModalProps> = ({
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close job alert"
             className="p-1 rounded text-slate-400 hover:text-slate-900 transition-colors"
           >
             <X className="w-5 h-5" />

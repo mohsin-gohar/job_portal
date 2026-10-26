@@ -38,7 +38,17 @@ export const Header = memo(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   useFocusTrap(mobileMenuOpen, mobileMenuRef);
+
   const [skillMatcherOpen, setSkillMatcherOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
   const [alertModalOpen, setAlertModalOpen] = useState(false);
 
   // Close mobile menu on route change

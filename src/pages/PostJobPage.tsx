@@ -64,6 +64,8 @@ export const PostJobPage: React.FC = () => {
     if (form.salaryMin > form.salaryMax) {
       errs.salaryMax = 'Maximum salary must be greater than or equal to minimum salary';
     }
+    if (!form.skills.trim()) errs.skills = 'Skills are required';
+    if (!form.benefits.trim()) errs.benefits = 'Benefits are required';
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -376,7 +378,8 @@ export const PostJobPage: React.FC = () => {
               value={form.skills}
               onChange={(e) => setForm({ ...form, skills: e.target.value })}
               placeholder="e.g. React, TypeScript, GraphQL, Node.js"
-              className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-md text-slate-800 focus:outline-hidden"
+              aria-invalid={!!errors.skills}
+              className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-md text-slate-800 focus:outline-hidden focus:border-slate-400 transition-colors {[errors.skills] && 'is-invalid'}"
             />
           </div>
 
@@ -389,7 +392,8 @@ export const PostJobPage: React.FC = () => {
               rows={2}
               value={form.benefits}
               onChange={(e) => setForm({ ...form, benefits: e.target.value })}
-              className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-md text-slate-800 focus:outline-hidden"
+              aria-invalid={!!errors.benefits}
+              className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-md text-slate-800 focus:outline-hidden focus:border-slate-400 transition-colors {[errors.benefits] && 'is-invalid'}"
             />
           </div>
         </div>

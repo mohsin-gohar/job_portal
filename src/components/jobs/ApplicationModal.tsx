@@ -175,12 +175,11 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     setTimeout(() => {
       setUploadProgress(100);
       const sizeFormatted = (file.size / (1024 * 1024)).toFixed(1) + ' MB';
-      const updated = {
-        ...values,
+      setValues((prev) => ({
+        ...prev,
         resumeFileName: file.name,
         resumeFileSize: sizeFormatted,
-      };
-      setValues(updated);
+      }));
       setErrors((prev) => {
         const next = { ...prev };
         delete next.resume;

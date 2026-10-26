@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { X, TrendingUp, DollarSign, Award } from 'lucide-react';
 
 interface SalaryInsightsModalProps {
@@ -18,6 +19,15 @@ const BENCHMARKS = [
 
 export const SalaryInsightsModal: React.FC<SalaryInsightsModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
     <div
