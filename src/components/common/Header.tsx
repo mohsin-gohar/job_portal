@@ -62,9 +62,24 @@ export const Header = memo(() => {
     return false;
   };
 
+  const headerScene = location.pathname.startsWith('/companies/')
+    ? '/header-scenes/company.png'
+    : location.pathname.startsWith('/companies')
+      ? '/header-scenes/companies.png'
+      : location.pathname.startsWith('/talent')
+        ? '/header-scenes/talent.png'
+        : '/header-scenes/jobs.png';
+
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-2xs">
+      <header
+        className="sticky top-0 z-40 border-b border-white/70 bg-white/90 shadow-2xs backdrop-blur-xl"
+        style={{
+          backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0.94), rgba(255,255,255,0.78), rgba(255,255,255,0.94)), url(${headerScene})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }}
+      >
         <div className="h-0.5 bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-600" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 gap-4">
