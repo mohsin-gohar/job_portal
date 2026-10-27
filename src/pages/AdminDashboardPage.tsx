@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import {
@@ -120,9 +120,9 @@ export const AdminDashboardPage: React.FC = () => {
   const resetModalRef = useRef<HTMLDivElement>(null);
   const testingWebhookRef = useRef<HTMLDivElement>(null);
   
-  const { focusTrap: jobToDeleteFocusTrap, isActive: jobToDeleteFocusActive } = useFocusTrap(jobToDeleteRef);
-  const { focusTrap: resetModalFocusTrap, isActive: resetModalFocusActive } = useFocusTrap(resetModalRef);
-  const { focusTrap: testingWebhookFocusTrap, isActive: testingWebhookFocusActive } = useFocusTrap(testingWebhookRef);
+  useFocusTrap(Boolean(jobToDelete), jobToDeleteRef);
+  useFocusTrap(resetModalOpen, resetModalRef);
+  useFocusTrap(testingWebhook, testingWebhookRef);
   
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
