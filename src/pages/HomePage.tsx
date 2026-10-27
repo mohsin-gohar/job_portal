@@ -140,7 +140,7 @@ export const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* SECTION 1: Master Minimalist Hero */}
-      <section className="relative pt-20 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200/90 overflow-hidden bg-white">
+      <section className="relative pt-24 pb-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200/90 overflow-hidden bg-white">
         {/* Background architectural image */}
         <div className="absolute inset-0 -z-10">
           <img loading="lazy" decoding="async"
@@ -148,7 +148,7 @@ export const HomePage: React.FC = () => {
             alt=""
             className="w-full h-full object-cover object-center opacity-10"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(109,93,252,0.12),transparent_42%),linear-gradient(to_bottom,rgba(255,255,255,0.93),rgba(255,255,255,0.97)_62%,#fff)]" />
         </div>
         {/* Architectural grid overlay */}
         <div 
@@ -172,8 +172,8 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Clean Master Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-950 max-w-3xl mx-auto leading-[1.12]">
-            Where extraordinary talent finds <span className="text-indigo-600">visionary teams</span>.
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-slate-950 max-w-4xl mx-auto leading-[1.05]">
+            Where extraordinary talent finds <span className="text-gradient-brand">visionary teams</span>.
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -182,7 +182,7 @@ export const HomePage: React.FC = () => {
 
           {/* Unified High-End Search & Filter Deck */}
           <div className="pt-2 max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl border border-slate-200/90 shadow-soft focus-within:border-slate-400 focus-within:ring-4 focus-within:ring-slate-950/5 transition-all flex flex-col sm:flex-row items-stretch overflow-hidden">
+            <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-xl shadow-slate-900/[0.07] focus-within:border-indigo-300 focus-within:ring-4 focus-within:ring-indigo-600/10 transition-all flex flex-col sm:flex-row items-stretch overflow-hidden">
               {/* Keyword Search Field */}
               <div className="relative flex-1 flex items-center min-w-0 border-b sm:border-b-0 sm:border-r border-slate-200/80">
                 <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 shrink-0" />
@@ -233,7 +233,7 @@ export const HomePage: React.FC = () => {
                     refetchJobs();
                     scrollToExplorer();
                   }}
-                  className="w-full sm:w-auto px-6 py-3 bg-slate-950 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-xs active:scale-[0.99]"
+                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20 active:scale-[0.99]"
                 >
                   <span>Explore Jobs</span>
                   <ArrowRight className="w-4 h-4" />

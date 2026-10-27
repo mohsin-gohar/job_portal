@@ -64,7 +64,7 @@ export const Header = memo(() => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-2xs">
+      <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-2xs">
         <div className="h-0.5 bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-600" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 gap-4">
@@ -74,7 +74,7 @@ export const Header = memo(() => {
                 to="/"
                 className="flex items-center gap-2.5 shrink-0 group"
               >
-                <div className="w-8 h-8 rounded-lg bg-slate-950 text-white flex items-center justify-center font-bold text-sm shadow-xs transition-transform group-hover:scale-105">
+                <div className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-700 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-indigo-900/15 transition-transform group-hover:scale-105">
                   <span className="tracking-tighter font-extrabold text-white">L</span>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -327,7 +327,7 @@ export const Header = memo(() => {
               {/* Primary CTA: Post a Job */}
               <Link
                 to="/post-job"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-xs hover:shadow-sm transition-all duration-150 active:scale-[0.98] whitespace-nowrap ml-1"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 rounded-lg shadow-sm shadow-indigo-600/20 hover:shadow-md transition-all duration-150 active:scale-[0.98] whitespace-nowrap ml-1"
               >
                 <PlusCircle className="w-3.5 h-3.5" />
                 <span>Post a Job</span>
