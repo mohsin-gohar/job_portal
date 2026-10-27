@@ -284,7 +284,7 @@ export const AdminDashboardPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#f5f7fb] text-slate-900 pb-20">
       {/* SECTION 1: Top Executive Admin Bar */}
-      <section className="relative overflow-hidden border-b border-white/10 bg-slate-950 px-4 pb-9 pt-8 text-white sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_78%_10%,rgba(99,102,241,.32),transparent_34%),linear-gradient(135deg,#020617_0%,#111827_55%,#172554_100%)] px-4 pb-9 pt-8 text-white sm:px-6 lg:px-8">
         <div className="pointer-events-none absolute -right-24 -top-32 h-80 w-80 rounded-full bg-indigo-500/25 blur-3xl" />
         <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-96 rounded-full bg-cyan-400/10 blur-3xl" />
         <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-7 md:flex-row md:items-center">
@@ -303,13 +303,17 @@ export const AdminDashboardPage: React.FC = () => {
             <p className="mt-2 max-w-2xl text-xs leading-relaxed text-slate-400 sm:text-sm">
               One calm view for marketplace health, hiring velocity, trusted partners, and the decisions that keep Lumina moving.
             </p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] font-medium text-slate-400">
+              <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />All systems operational</span>
+              <span className="text-slate-600">Last synced just now</span>
+            </div>
           </div>
 
           {/* Quick Actions */}
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
               to="/post-job"
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-slate-950 hover:bg-slate-800 rounded-xl transition-all shadow-xs"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white px-4 py-2 text-xs font-semibold text-slate-950 shadow-lg shadow-indigo-950/20 transition-all hover:-translate-y-0.5 hover:bg-indigo-50"
             >
               <PlusCircle className="w-3.5 h-3.5" />
               <span>Post New Role</span>
@@ -341,7 +345,7 @@ export const AdminDashboardPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-6">
         {/* SECTION 2: Platform KPI Performance Cards */}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-          <div className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
+          <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-gradient-to-r before:from-indigo-500 before:to-cyan-400 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span className="font-semibold">Curated Openings</span>
               <Briefcase className="w-4 h-4 text-indigo-600" />
@@ -354,7 +358,7 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
+          <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-gradient-to-r before:from-indigo-500 before:to-cyan-400 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span className="font-semibold">Verified Companies</span>
               <Building2 className="w-4 h-4 text-indigo-600" />
@@ -368,7 +372,7 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
+          <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-gradient-to-r before:from-indigo-500 before:to-cyan-400 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span className="font-semibold">Candidate Roster</span>
               <Users className="w-4 h-4 text-indigo-600" />
@@ -381,7 +385,7 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
+          <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-gradient-to-r before:from-indigo-500 before:to-cyan-400 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span className="font-semibold">Platform Status</span>
               <Activity className="w-4 h-4 text-emerald-600" />
@@ -397,7 +401,7 @@ export const AdminDashboardPage: React.FC = () => {
         </div>
 
         {/* SECTION 3: Tabbed Navigation */}
-        <div className="sticky top-0 z-20 -mx-1 flex items-center gap-2 overflow-x-auto rounded-2xl border border-slate-200/80 bg-white/90 px-2 pb-0 shadow-sm backdrop-blur-xl">
+        <div className="sticky top-3 z-20 -mx-1 flex items-center gap-1 overflow-x-auto rounded-2xl border border-slate-200/80 bg-white/95 px-2 pb-0 shadow-[0_14px_35px_-22px_rgba(15,23,42,.55)] backdrop-blur-xl">
           {[
             { id: 'overview', label: 'Overview & Analytics', icon: Activity },
             { id: 'jobs', label: `Job Listings (${jobs.length})`, icon: Briefcase },
