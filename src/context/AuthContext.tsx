@@ -29,9 +29,12 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const STORAGE_KEY = 'lumina_auth_user';
 
 // Predefined administrator accounts
+// Demo/admin access for this frontend-only project:
+// Email: admin@lumina.careers | Password: admin123
+// Both allow-listed administrator emails intentionally share the same reset password.
 const ADMIN_CREDENTIALS: ReadonlyArray<{ email: string; passwordHash: string }> = [
   { email: 'admin@lumina.careers', passwordHash: '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9' },
-  { email: 'admin@shopsphere.studio', passwordHash: '6051fc84a7a0d74c225fb18a496b09952da5642e60723ecae543298edd7d82d6' },
+  { email: 'admin@shopsphere.studio', passwordHash: '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9' },
 ];
 
 const VALID_ROLES: UserRole[] = ['candidate', 'employer', 'admin'];
