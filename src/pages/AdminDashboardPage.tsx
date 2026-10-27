@@ -282,23 +282,26 @@ export const AdminDashboardPage: React.FC = () => {
   const openCandidates = candidates.filter((c) => c.openToWork).length;
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
+    <div className="min-h-screen bg-[#f5f7fb] text-slate-900 pb-20">
       {/* SECTION 1: Top Executive Admin Bar */}
-      <section className="bg-white border-b border-slate-200/90 pt-8 pb-7 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <section className="relative overflow-hidden border-b border-white/10 bg-slate-950 px-4 pb-9 pt-8 text-white sm:px-6 lg:px-8">
+        <div className="pointer-events-none absolute -right-24 -top-32 h-80 w-80 rounded-full bg-indigo-500/25 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-96 rounded-full bg-cyan-400/10 blur-3xl" />
+        <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-7 md:flex-row md:items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950 text-white text-xs font-semibold mb-2.5 shadow-2xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Root Administrator Console</span>
-              <span aria-hidden="true" className="text-slate-600">·</span>
-              <span className="font-mono text-slate-300">{user?.email}</span>
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.08] px-3 py-1 text-xs font-semibold text-slate-200 shadow-lg shadow-black/10">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,.9)]" />
+              <ShieldCheck className="h-3.5 w-3.5 text-indigo-300" />
+              <span>Executive Control Center</span>
+              <span aria-hidden="true" className="text-slate-500">·</span>
+              <span className="font-mono text-slate-400">{user?.email}</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950">
-              Platform Administration & Settings
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Platform command center
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl leading-relaxed">
-              Global governance controls, active listings oversight, candidate roster monitoring, and system configuration.
+            <p className="mt-2 max-w-2xl text-xs leading-relaxed text-slate-400 sm:text-sm">
+              One calm view for marketplace health, hiring velocity, trusted partners, and the decisions that keep Lumina moving.
             </p>
           </div>
 
@@ -337,8 +340,8 @@ export const AdminDashboardPage: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-6">
         {/* SECTION 2: Platform KPI Performance Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-soft">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+          <div className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span className="font-semibold">Curated Openings</span>
               <Briefcase className="w-4 h-4 text-indigo-600" />
@@ -351,7 +354,7 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-soft">
+          <div className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span className="font-semibold">Verified Companies</span>
               <Building2 className="w-4 h-4 text-indigo-600" />
@@ -365,7 +368,7 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-soft">
+          <div className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span className="font-semibold">Candidate Roster</span>
               <Users className="w-4 h-4 text-indigo-600" />
@@ -378,7 +381,7 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-soft">
+          <div className="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_12px_35px_-22px_rgba(15,23,42,.45)] transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_18px_42px_-20px_rgba(79,70,229,.24)]">
             <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
               <span className="font-semibold">Platform Status</span>
               <Activity className="w-4 h-4 text-emerald-600" />
@@ -394,7 +397,7 @@ export const AdminDashboardPage: React.FC = () => {
         </div>
 
         {/* SECTION 3: Tabbed Navigation */}
-        <div className="border-b border-slate-200 flex items-center gap-2 overflow-x-auto pb-px">
+        <div className="sticky top-0 z-20 -mx-1 flex items-center gap-2 overflow-x-auto rounded-2xl border border-slate-200/80 bg-white/90 px-2 pb-0 shadow-sm backdrop-blur-xl">
           {[
             { id: 'overview', label: 'Overview & Analytics', icon: Activity },
             { id: 'jobs', label: `Job Listings (${jobs.length})`, icon: Briefcase },
@@ -428,7 +431,7 @@ export const AdminDashboardPage: React.FC = () => {
         {/* TAB 1: OVERVIEW & ANALYTICS */}
         {activeTab === 'overview' && (
           <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
               {/* Jobs Breakdown by Department */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-soft space-y-4">
                 <div className="flex items-center justify-between">
@@ -437,7 +440,7 @@ export const AdminDashboardPage: React.FC = () => {
                 </div>
                 <div className="space-y-3 pt-1">
                   {jobsByCategory.map(([cat, count]) => {
-                    const pct = Math.round((count / jobs.length) * 100);
+                    const pct = jobs.length ? Math.round((count / jobs.length) * 100) : 0;
                     return (
                       <div key={cat} className="space-y-1">
                         <div className="flex items-center justify-between text-xs">
