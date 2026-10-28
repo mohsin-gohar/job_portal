@@ -28,6 +28,8 @@ const DashboardPage = lazy(() => import('./pages/DashboardPage').then((m) => ({ 
 const LoginPage = lazy(() => import('./pages/LoginPage').then((m) => ({ default: m.LoginPage })));
 const RegisterPage = lazy(() => import('./pages/RegisterPage').then((m) => ({ default: m.RegisterPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
+const SalaryCalculatorPage = lazy(() => import('./pages/SalaryCalculatorPage').then((m) => ({ default: m.SalaryCalculatorPage })));
+const CompareJobsPage = lazy(() => import('./pages/CompareJobsPage').then((m) => ({ default: m.CompareJobsPage })));
 
 const PageFallback = () => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -82,6 +84,8 @@ export default function App() {
                             <Route path="/talent" element={<TalentPage />} />
                             <Route path="/ats" element={<AtsDashboardPage />} />
                             <Route path="/about" element={<AboutPage />} />
+                            <Route path="/salary-calculator" element={<SalaryCalculatorPage />} />
+                            <Route path="/compare" element={<CompareJobsPage />} />
                             <Route path="/contact" element={<ContactPage />} />
                             <Route path="/login" element={<LoginPage />} />
                             <Route path="/register" element={<RegisterPage />} />

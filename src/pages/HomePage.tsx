@@ -34,6 +34,8 @@ import {
   Building2,
   ChevronRight,
   Check,
+  GitCompare,
+  Calculator,
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
@@ -826,6 +828,52 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
         </div>
+      {/* Tools Banner */}
+      <section className="py-10 bg-white border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full mb-2">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Career Tools</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                Free tools to plan your next move
+              </h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Link
+              to="/salary-calculator"
+              className="group p-5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-emerald-300 hover:shadow-soft transition-all flex items-center gap-4"
+            >
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <Calculator className="w-6 h-6 text-emerald-600" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-sm font-bold text-slate-900">Salary Calculator</h3>
+                <p className="text-xs text-slate-500 mt-0.5">Estimate take-home pay after taxes.</p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors" />
+            </Link>
+            <Link
+              to="/compare"
+              className="group p-5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-indigo-300 hover:shadow-soft transition-all flex items-center gap-4"
+            >
+              <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <GitCompare className="w-6 h-6 text-indigo-600" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-sm font-bold text-slate-900">Job Comparison</h3>
+                <p className="text-xs text-slate-500 mt-0.5">Compare up to 4 roles side by side.</p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 transition-colors" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+
       </section>
 
       {/* Mobile Filters Slide-over / Modal */}

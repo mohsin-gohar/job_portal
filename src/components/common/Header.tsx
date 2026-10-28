@@ -20,6 +20,8 @@ import {
   LogOut,
   Compass,
   ChevronDown,
+  GitCompare,
+  Calculator,
 } from 'lucide-react';
 import { useSavedJobs } from '../../context/SavedJobsContext';
 import { useApplication } from '../../context/ApplicationContext';
@@ -130,6 +132,30 @@ export const Header = memo(() => {
                 >
                   <Users className="w-4 h-4 text-slate-400" />
                   <span>Talent</span>
+                </Link>
+
+                <Link
+                  to="/compare"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${
+                    isActive('/compare')
+                      ? 'bg-slate-100 text-slate-950 font-semibold'
+                      : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
+                  }`}
+                >
+                  <GitCompare className="w-4 h-4 text-slate-400" />
+                  <span>Compare</span>
+                </Link>
+
+                <Link
+                  to="/salary-calculator"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${
+                    isActive('/salary-calculator')
+                      ? 'bg-slate-100 text-slate-950 font-semibold'
+                      : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
+                  }`}
+                >
+                  <Calculator className="w-4 h-4 text-slate-400" />
+                  <span>Salary</span>
                 </Link>
 
                 {(user?.role === 'employer' || user?.role === 'admin') && (
@@ -512,6 +538,24 @@ export const Header = memo(() => {
               <span className="text-xs font-mono tabular-nums text-slate-500">
                 {applications.length} submitted
               </span>
+            </Link>
+
+            <Link
+              to="/compare"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md hover:bg-slate-100 text-slate-800"
+            >
+              <GitCompare className="w-4 h-4 text-slate-500" />
+              <span>Compare Jobs</span>
+            </Link>
+
+            <Link
+              to="/salary-calculator"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md hover:bg-slate-100 text-slate-800"
+            >
+              <Calculator className="w-4 h-4 text-slate-500" />
+              <span>Salary Calculator</span>
             </Link>
 
             <Link
