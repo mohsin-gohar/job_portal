@@ -37,6 +37,7 @@ import {
   GitCompare,
   Calculator,
   LayoutDashboard,
+  BarChart3,
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
@@ -843,7 +844,7 @@ export const HomePage: React.FC = () => {
               </h2>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               to="/salary-calculator"
               className="group p-5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-emerald-300 hover:shadow-soft transition-all flex items-center gap-4"
@@ -882,6 +883,19 @@ export const HomePage: React.FC = () => {
                 <p className="text-xs text-slate-500 mt-0.5">Kanban board for your applications.</p>
               </div>
               <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-violet-600 transition-colors" />
+            </Link>
+            <Link
+              to="/insights"
+              className="group p-5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-emerald-300 hover:shadow-soft transition-all flex items-center gap-4"
+            >
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <BarChart3 className="w-6 h-6 text-emerald-600" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-sm font-bold text-slate-900">Career Insights</h3>
+                <p className="text-xs text-slate-500 mt-0.5">Market trends & salary analytics.</p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors" />
             </Link>
           </div>
         </div>

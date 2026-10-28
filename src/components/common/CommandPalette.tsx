@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Command, ArrowRight, X, Briefcase, Building2, Users, FileText, Sparkles, Calculator, GitCompare, LayoutDashboard } from 'lucide-react';
+import { Search, Command, ArrowRight, X, Briefcase, Building2, Users, FileText, Sparkles, Calculator, GitCompare, LayoutDashboard, BarChart3 } from 'lucide-react';
 
 interface CmdItem { id: string; label: string; hint?: string; icon: React.ReactNode; action: () => void; group: string; }
 
@@ -32,6 +32,7 @@ export const CommandPalette: React.FC = () => {
     { id: 'salary', label: 'Salary Calculator', hint: '/salary-calculator', icon: <Calculator className="w-4 h-4" />, action: () => navigate('/salary-calculator'), group: 'Tools' },
     { id: 'compare', label: 'Compare Jobs', hint: '/compare', icon: <GitCompare className="w-4 h-4" />, action: () => navigate('/compare'), group: 'Tools' },
     { id: 'tracker', label: 'Application Tracker', hint: '/tracker', icon: <LayoutDashboard className="w-4 h-4" />, action: () => navigate('/tracker'), group: 'Tools' },
+    { id: 'insights', label: 'Career Insights', hint: '/insights', icon: <BarChart3 className="w-4 h-4" />, action: () => navigate('/insights'), group: 'Tools' },
     { id: 'about', label: 'About', hint: '/about', icon: <Sparkles className="w-4 h-4" />, action: () => navigate('/about'), group: 'Navigate' },
     { id: 'contact', label: 'Contact', hint: '/contact', icon: <FileText className="w-4 h-4" />, action: () => navigate('/contact'), group: 'Navigate' },
   ], [navigate]);
