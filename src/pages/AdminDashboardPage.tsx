@@ -118,11 +118,9 @@ export const AdminDashboardPage: React.FC = () => {
   // Focus trap and Escape handlers for modals
   const jobToDeleteRef = useRef<HTMLDivElement>(null);
   const resetModalRef = useRef<HTMLDivElement>(null);
-  const testingWebhookRef = useRef<HTMLDivElement>(null);
-  
+
   useFocusTrap(Boolean(jobToDelete), jobToDeleteRef);
   useFocusTrap(resetModalOpen, resetModalRef);
-  useFocusTrap(testingWebhook, testingWebhookRef);
   
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
