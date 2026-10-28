@@ -30,6 +30,7 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage').then((m) => ({ de
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 const SalaryCalculatorPage = lazy(() => import('./pages/SalaryCalculatorPage').then((m) => ({ default: m.SalaryCalculatorPage })));
 const CompareJobsPage = lazy(() => import('./pages/CompareJobsPage').then((m) => ({ default: m.CompareJobsPage })));
+const ApplicationTrackerPage = lazy(() => import('./pages/ApplicationTrackerPage').then((m) => ({ default: m.ApplicationTrackerPage })));
 
 const PageFallback = () => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -86,6 +87,7 @@ export default function App() {
                             <Route path="/about" element={<AboutPage />} />
                             <Route path="/salary-calculator" element={<SalaryCalculatorPage />} />
                             <Route path="/compare" element={<CompareJobsPage />} />
+                            <Route path="/tracker" element={<ApplicationTrackerPage />} />
                             <Route path="/contact" element={<ContactPage />} />
                             <Route path="/login" element={<LoginPage />} />
                             <Route path="/register" element={<RegisterPage />} />

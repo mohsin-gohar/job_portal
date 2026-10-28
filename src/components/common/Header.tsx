@@ -147,6 +147,18 @@ export const Header = memo(() => {
                 </Link>
 
                 <Link
+                  to="/tracker"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${
+                    isActive('/tracker')
+                      ? 'bg-slate-100 text-slate-950 font-semibold'
+                      : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
+                  }`}
+                >
+                  <LayoutDashboard className="w-4 h-4 text-slate-400" />
+                  <span>Tracker</span>
+                </Link>
+
+                <Link
                   to="/salary-calculator"
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${
                     isActive('/salary-calculator')
@@ -547,6 +559,15 @@ export const Header = memo(() => {
             >
               <GitCompare className="w-4 h-4 text-slate-500" />
               <span>Compare Jobs</span>
+            </Link>
+
+            <Link
+              to="/tracker"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md hover:bg-slate-100 text-slate-800"
+            >
+              <LayoutDashboard className="w-4 h-4 text-slate-500" />
+              <span>Application Tracker</span>
             </Link>
 
             <Link
