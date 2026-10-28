@@ -22,6 +22,7 @@ import {
   ChevronDown,
   GitCompare,
   Calculator,
+  Search,
 } from 'lucide-react';
 import { useSavedJobs } from '../../context/SavedJobsContext';
 import { useApplication } from '../../context/ApplicationContext';
@@ -305,6 +306,16 @@ export const Header = memo(() => {
                   aria-label="Set Job Alert"
                 >
                   <Bell className="w-4 h-4" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true }))}
+                  className="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
+                  title="Search (Ctrl+K)"
+                  aria-label="Open command palette"
+                >
+                  <Search className="w-4 h-4" />
                 </button>
               </div>
 

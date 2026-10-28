@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
+import { CommandPalette } from './components/common/CommandPalette';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 
 const HomePage = lazy(() => import('./pages/HomePage').then((m) => ({ default: m.HomePage })));
@@ -70,6 +71,7 @@ export default function App() {
                       <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[450px] w-[900px] rounded-full bg-slate-900/[0.02] blur-3xl" />
                     </div>
                     <Header />
+                    <CommandPalette />
                     <main id="main-content" className="flex-1" tabIndex={-1}>
                       <ErrorBoundary>
                         <Suspense fallback={<PageFallback />}>
