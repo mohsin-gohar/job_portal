@@ -4,6 +4,10 @@ A production-grade, enterprise-level job portal built with React 19, TypeScript,
 
 ## ✨ Premium Features
 
+
+- **User Profile**: Complete LinkedIn-style profile with experience, education, skills, and profile strength.
+- **Notifications Center**: Real-time style alerts for job matches, application updates, and messages.
+- **Messaging**: Direct messaging with recruiters and hiring teams (inbox simulation).
 - **Premium Dashboard**: Role-based personal & admin dashboards with analytics, pipeline tracking, and professional UI.
 - **Job Discovery**: Advanced search, multi-filter (category, type, location, experience, salary, remote), sort, pagination, quick-view drawer.
 - **Job Detail & Apply**: Rich descriptions, responsibilities, requirements, skills, benefits, apply modal with tracking.
@@ -46,7 +50,7 @@ npm run preview
 
 ## Routes
 
-`/` Home · `/explore` · `/jobs/:id` · `/saved` · `/applications` · `/post-job` · `/companies` · `/companies/:id` · `/talent` · `/ats` · `/admin` · `/dashboard` · `/about` · `/contact` · `/login` · `/register` · `/salary-calculator` · `/compare` · `/tracker` · `/insights`
+`/` Home · `/explore` · `/jobs/:id` · `/saved` · `/applications` · `/post-job` · `/companies` · `/companies/:id` · `/talent` · `/ats` · `/admin` · `/dashboard` · `/profile` · `/notifications` · `/messages` · `/about` · `/contact` · `/login` · `/register` · `/salary-calculator` · `/compare` · `/tracker` · `/insights`
 
 All pages are fully functional and viewable. Data seeds automatically on first load.
 
