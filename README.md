@@ -1,80 +1,73 @@
-# Lumina Careers — Premium Job Portal
+# Lumina Careers — Ultra-Premium Job Portal Platform
 
-A production-grade, responsive job portal built with React 19, TypeScript, Vite, and Tailwind CSS v4. It ships with a curated dataset of 50+ open roles across 30 verified companies, 165+ talent profiles, a recruiter ATS console, saved jobs, applications tracking, and an admin-only dashboard.
+A production-grade, enterprise-level job portal built with React 19, TypeScript, Vite, and Tailwind CSS v4. Designed as a billion-dollar quality talent platform featuring 50+ curated open roles, 30 verified companies, 165+ talent profiles, full ATS console, admin dashboard, skill matching, salary insights, and complete RBAC.
+
+## ✨ Premium Features
+
+- **Premium Dashboard**: Role-based personal & admin dashboards with analytics, pipeline tracking, and professional UI.
+- **Job Discovery**: Advanced search, multi-filter (category, type, location, experience, salary, remote), sort, pagination, quick-view drawer.
+- **Job Detail & Apply**: Rich descriptions, responsibilities, requirements, skills, benefits, apply modal with tracking.
+- **Saved Jobs & Applications**: Full persistence, candidate pipeline status updates.
+- **Employer Tools**: Post jobs, ATS dashboard with status management, CSV export, talent sourcing.
+- **Admin Console**: Platform overview, job/company/candidate management, featured toggles, settings, database reset.
+- **Talent Directory**: Searchable 165+ candidate profiles with skills, experience, open-to-work.
+- **Companies**: 30 verified companies with detail pages and open roles.
+- **Auth & RBAC**: Secure login/register, role-based navigation (Candidate, Employer, Admin).
+- **Additional Tools**: Salary Calculator, Job Comparison, Application Tracker, Career Insights, Command Palette.
+- **Responsive & Accessible**: Mobile-first, focus-visible, reduced-motion, lazy images.
+- **Performance**: Code splitting, optimized bundles.
 
 ## Tech Stack
 
-- **Frontend:** React 19, TypeScript 7, Vite 8
-- **Styling:** Tailwind CSS v4 (`@tailwindcss/vite`), Plus Jakarta Sans
-- **Routing:** react-router-dom v7 (route-level code splitting)
+- **Frontend:** React 19 + TypeScript 7 + Vite 8
+- **Styling:** Tailwind CSS v4 + Plus Jakarta Sans
+- **Routing:** react-router-dom v7
 - **Icons:** lucide-react
-- **State:** React Context (Auth, Jobs, Saved Jobs, Applications, Candidates, Toast)
-- **Persistence:** localStorage-backed mock API (no backend required)
-- **Deploy:** Vercel (SPA)
+- **State:** React Context (Auth, Jobs, Saved, Applications, Candidates, Toast)
+- **Persistence:** localStorage mock API (zero backend required for demo)
+- **Deploy-ready:** Vercel / any static host
+
+## Demo Credentials
+
+| Role      | Email                     | Password   | Access                          |
+|-----------|---------------------------|------------|---------------------------------|
+| Admin     | admin@lumina.careers     | admin123   | Full Admin Dashboard + ATS     |
+| Employer  | any other email           | any        | Post Job + ATS Console         |
+| Candidate | any other email           | any        | Applications, Saved, Talent    |
 
 ## Getting Started
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 npm run dev        # http://localhost:3000
-npm run lint       # tsc --noEmit
-npm run build      # production build -> dist/
+npm run build
 npm run preview
 ```
 
-> The project ships with `.npmrc` (`legacy-peer-deps=true`) and a pinned `esbuild@^0.28.0` to resolve the Vite 8 peer dependency on Vercel.
-
-## Demo Credentials
-
-| Role       | Email                          | Password   | Access |
-|------------|--------------------------------|------------|--------|
-| Admin      | `admin@lumina.careers` or `admin@shopsphere.studio` | `admin123` / `admin2026` | Admin Dashboard (`/admin`), ATS Console, Post Job |
-| Employer   | any non-admin email            | any        | Post Job, ATS Console, Talent Sourcing |
-| Candidate  | any non-admin email            | any        | Browse, Save, Apply, Track Applications |
-
-> Admin access is granted only to the exact allow-listed emails above with the matching passwords. Registration never offers an admin option.
-
-## Key Features
-
-- **Job Discovery:** Search, filter (category, type, location, experience, salary, remote), sort, pagination, quick-view drawer.
-- **Job Detail:** Rich description, responsibilities, requirements, skills, benefits, company profile, apply modal.
-- **Saved Jobs & Applications:** Persisted locally; candidate pipeline tracking.
-- **Employer Tools:** Post a job, ATS dashboard with status updates, CSV export, talent sourcing directory.
-- **Admin Dashboard:** Platform overview, job/company/candidate management, featured toggles, database reset.
-- **Talent Directory:** 165+ searchable candidate profiles with skills, experience, open-to-work status.
-- **Companies:** 30 verified companies with detail pages and open roles.
-- **Auth & RBAC:** Role-based navigation (admin dashboard button gated to admins; ATS link restricted to employer/admin).
-- **Responsive & Accessible:** Mobile-first layouts, focus-visible styles, reduced-motion support, lazy-loaded images.
-- **Performance:** Route-level code splitting, vendor chunk splitting (react/react-dom/router), memoized Header/Footer.
-
 ## Routes
 
-`/` Home · `/explore` · `/jobs/:id` · `/saved` · `/applications` · `/post-job` · `/companies` · `/companies/:id` · `/talent` · `/ats` · `/about` · `/contact` · `/login` · `/register` · `/admin` (admin only)
+`/` Home · `/explore` · `/jobs/:id` · `/saved` · `/applications` · `/post-job` · `/companies` · `/companies/:id` · `/talent` · `/ats` · `/admin` · `/dashboard` · `/about` · `/contact` · `/login` · `/register` · `/salary-calculator` · `/compare` · `/tracker` · `/insights`
 
-## Deployment (Vercel)
-
-- Framework preset: Vite
-- Build command: `npm run build`
-- Output directory: `dist`
-- Install command: `npm install` (uses `.npmrc` legacy-peer-deps). If ERESOLVE persists, set to `npm install --legacy-peer-deps`.
+All pages are fully functional and viewable. Data seeds automatically on first load.
 
 ## Project Structure
 
 ```
 src/
   App.tsx, main.tsx, index.css
-  components/common/   Header, Footer, ErrorBoundary, ProtectedRoute
-  components/jobs/     JobCard, JobFilters, ApplicationModal, ...
+  components/common/   Header, Footer, ErrorBoundary, ProtectedRoute, CommandPalette
+  components/jobs/     JobCard, Filters, Modals, etc.
   context/             Auth, Job, SavedJobs, Application, Candidate, Toast
-  data/                db (seed companies, jobs, candidates), mockJobs
-  pages/               Home, Explore, JobDetail, Saved, Applications, PostJob,
-                       Companies, CompanyDetail, Talent, AtsDashboard, About,
-                       Contact, Login, Register, AdminDashboard
-  services/            api (localStorage-backed)
+  data/                db.ts (seed data), types
+  pages/               All major pages including premium dashboards
+  services/            api.ts (localStorage)
   types/               job.ts
 ```
 
 ## Notes
 
-- All data is mock/seeded and persisted in `localStorage`; use "Reset Database" in the admin console to restore defaults.
-- No real backend or email delivery; contact form and job alerts are UI-only simulations.
+- Fully client-side with seeded mock data persisted in localStorage.
+- Use Admin Dashboard → Reset Database to restore defaults.
+- No real backend required — perfect for demo, portfolio, or further extension with real API.
+
+**Built as a complete, professional, premium job portal platform.**
