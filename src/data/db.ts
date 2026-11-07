@@ -653,6 +653,7 @@ export const GENERATED_JOBS: Job[] = (() => {
 
   for (let cIdx = 0; cIdx < SEED_COMPANIES.length && count < 50; cIdx++) {
     const comp = SEED_COMPANIES[cIdx];
+    if (!comp) continue; // Guard against undefined (strict TS safety)
     // Distribute roles across partner companies
     const rolesToPost = Math.min(2, 50 - count);
 
@@ -660,6 +661,7 @@ export const GENERATED_JOBS: Job[] = (() => {
       count++;
       const templateIdx = (cIdx + rIdx * 3) % ROLE_TEMPLATES.length;
       const t = ROLE_TEMPLATES[templateIdx];
+      if (!t) continue; // Guard against undefined (strict TS safety)
 
       // Subtle variation in salary based on company stage
       const multiplier = comp.stage === 'Public' ? 1.15 : comp.stage === 'Series C+' ? 1.08 : 1.0;
@@ -777,6 +779,7 @@ export const GENERATED_CANDIDATES: CandidateUser[] = (() => {
     const firstName = FIRST_NAMES[i % FIRST_NAMES.length];
     const lastName = LAST_NAMES[(i * 3 + 7) % LAST_NAMES.length];
     const titleObj = CANDIDATE_TITLES[i % CANDIDATE_TITLES.length];
+    if (!titleObj) continue; // Guard against undefined
     const loc = LOCATIONS_LIST[i % LOCATIONS_LIST.length];
     const color = AVATAR_COLORS[i % AVATAR_COLORS.length];
     const isOpen = i % 4 !== 3; // 75% are actively Open to Work

@@ -127,9 +127,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // 2. Regular Candidate or Employer Login
     // Prevent non-admin users from claiming admin role
     const effectiveRole: UserRole = selectedRole === 'employer' ? 'employer' : 'candidate';
+    const localPart = cleanEmail.split('@')[0] || 'User';
     const regularUser: AuthUser = {
       id: `u_${Date.now()}`,
-      name: cleanEmail.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+      name: localPart.replace(/[._]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
       email: cleanEmail,
       role: effectiveRole,
       avatarColor: effectiveRole === 'employer' ? 'bg-indigo-600' : 'bg-slate-800',

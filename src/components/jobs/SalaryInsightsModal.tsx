@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { X, TrendingUp, DollarSign, Award } from 'lucide-react';
 

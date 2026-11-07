@@ -8,7 +8,6 @@ import {
   X,
   PlusCircle,
   Sparkles,
-  TrendingUp,
   Building,
   Users,
   User,

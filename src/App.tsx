@@ -1,16 +1,16 @@
-import React, { Suspense, lazy, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { ProtectedRoute } from './components/common/ProtectedRoute';
+import { Header } from './components/common/Header';
+import { Footer } from './components/common/Footer';
+import { CommandPalette } from './components/common/CommandPalette';
 import { ToastProvider } from './context/ToastContext';
 import { JobProvider } from './context/JobContext';
 import { SavedJobsProvider } from './context/SavedJobsContext';
 import { ApplicationProvider } from './context/ApplicationContext';
 import { CandidateProvider } from './context/CandidateContext';
 import { AuthProvider } from './context/AuthContext';
-import { ProtectedRoute } from './components/common/ProtectedRoute';
-import { Header } from './components/common/Header';
-import { Footer } from './components/common/Footer';
-import { CommandPalette } from './components/common/CommandPalette';
-import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const HomePage = lazy(() => import('./pages/HomePage').then((m) => ({ default: m.HomePage })));
 const JobDetailPage = lazy(() => import('./pages/JobDetailPage').then((m) => ({ default: m.JobDetailPage })));

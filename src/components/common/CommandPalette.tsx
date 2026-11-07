@@ -40,7 +40,7 @@ export const CommandPalette: React.FC = () => {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return items;
-    return items.filter((i) => i.label.toLowerCase().includes(q) || i.hint?.toLowerCase().includes(q));
+    return items.filter((i) => i.label.toLowerCase().includes(q) || (i.hint && i.hint.toLowerCase().includes(q)));
   }, [items, query]);
 
   const grouped = useMemo(() => {

@@ -222,14 +222,14 @@ export const jobsApi = {
       allJobs = allJobs.filter((job) => job.salaryMax >= filters.minSalary!);
     }
 
-    // 9. Sorting
+    // 9. Sorting (use sort + slice to avoid mutating stored data and stay ES2022 compatible)
     const sortBy = filters.sortBy || 'newest';
     if (sortBy === 'newest') {
-      allJobs.sort((a, b) => new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime());
+      allJobs = [...allJobs].sort((a, b) => new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime());
     } else if (sortBy === 'salary-high') {
-      allJobs.sort((a, b) => b.salaryMax - a.salaryMax);
+      allJobs = [...allJobs].sort((a, b) => b.salaryMax - a.salaryMax);
     } else if (sortBy === 'salary-low') {
-      allJobs.sort((a, b) => a.salaryMin - b.salaryMin);
+      allJobs = [...allJobs].sort((a, b) => a.salaryMin - b.salaryMin);
     }
 
     // 10. Pagination
