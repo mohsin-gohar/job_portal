@@ -1,1 +1,182 @@
-PLACEHOLDER_AUTH
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
+export type UserRole = 'candidate' | 'employer' | 'admin';
+
+export interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  avatarColor?: string;
+}
+
+export interface LoginResult {
+  success: boolean;
+  role?: UserRole;
+  error?: string;
+}
+
+interface AuthContextType {
+  user: AuthUser | null;
+  isAuthenticated: boolean;
+  login: (email: string, password: string, role?: UserRole) => Promise<LoginResult>;
+  register: (name: string, email: string, password: string, role: UserRole) => Promise<boolean>;
+  logout: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+const STORAGE_KEY = 'lumina_auth_user';
+
+const ADMIN_CREDENTIALS: ReadonlyArray<{ email: string; passwordHash: string }> = [
+  { email: 'admin@lumina.careers', passwordHash: '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9' },
+  { email: 'admin@shopsphere.studio', passwordHash: '6051fc84a7a0d74c225fb18a496b09952da5642e60723ecae543298edd7d82d6' },
+];
+
+const VALID_ROLES: UserRole[] = ['candidate', 'employer', 'admin'];
+
+async function sha256Hex(value: string): Promise<string> {
+  if (typeof crypto === 'undefined' || !crypto.subtle) {
+    return value;
+  }
+  const data = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+function isAuthUser(value: unknown): value is AuthUser {
+  if (!value || typeof value !== 'object') return false;
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.id === 'string' &&
+    candidate.id.length > 0 &&
+    typeof candidate.name === 'string' &&
+    candidate.name.length > 0 &&
+    typeof candidate.email === 'string' &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(candidate.email) &&
+    typeof candidate.role === 'string' &&
+    VALID_ROLES.includes(candidate.role as UserRole) &&
+    (candidate.avatarColor === undefined || typeof candidate.avatarColor === 'string')
+  );
+}
+
+function loadInitialUser(): AuthUser | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (isAuthUser(parsed)) {
+        if (parsed.role === 'admin' && !ADMIN_CREDENTIALS.some((c) => c.email === parsed.email)) {
+          return null;
+        }
+        return parsed;
+      }
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<AuthUser | null>(loadInitialUser);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (isAuthUser(parsed)) {
+          if (parsed.role === 'admin' && !ADMIN_CREDENTIALS.some((c) => c.email === parsed.email)) {
+            localStorage.removeItem(STORAGE_KEY);
+          } else {
+            setUser(parsed);
+          }
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
+    } catch {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }, []);
+
+  const persist = (u: AuthUser | null) => {
+    if (u) localStorage.setItem(STORAGE_KEY, JSON.stringify(u));
+    else localStorage.removeItem(STORAGE_KEY);
+  };
+
+  const isAuthenticated = !!user;
+
+  const login = async (email: string, password: string, selectedRole: UserRole = 'candidate'): Promise<LoginResult> => {
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPw = password.trim();
+    if (!cleanEmail || !cleanPw) return { success: false, error: 'Email and password are required' };
+
+    const adminCredential = ADMIN_CREDENTIALS.find((c) => c.email === cleanEmail);
+    if (adminCredential) {
+      const enteredHash = await sha256Hex(cleanPw);
+      if (enteredHash === adminCredential.passwordHash) {
+        const adminUser: AuthUser = {
+          id: 'admin_root',
+          name: 'Platform Administrator',
+          email: cleanEmail,
+          role: 'admin',
+          avatarColor: 'bg-slate-950',
+        };
+        setUser(adminUser);
+        persist(adminUser);
+        return { success: true, role: 'admin' };
+      }
+      return { success: false, error: 'Invalid security credentials for this account' };
+    }
+
+    const effectiveRole: UserRole = selectedRole === 'employer' ? 'employer' : 'candidate';
+    const regularUser: AuthUser = {
+      id: `u_${Date.now()}`,
+      name: cleanEmail.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+      email: cleanEmail,
+      role: effectiveRole,
+      avatarColor: effectiveRole === 'employer' ? 'bg-indigo-600' : 'bg-slate-800',
+    };
+    setUser(regularUser);
+    persist(regularUser);
+    return { success: true, role: effectiveRole };
+  };
+
+  const register = async (name: string, email: string, password: string, role: UserRole): Promise<boolean> => {
+    if (!name.trim() || !email.trim() || !password.trim()) return false;
+    if (password.trim().length < 8) return false;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return false;
+    const effectiveRole: UserRole = role === 'employer' ? 'employer' : 'candidate';
+    const newUser: AuthUser = {
+      id: `u_${Date.now()}`,
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      role: effectiveRole,
+      avatarColor: effectiveRole === 'employer' ? 'bg-indigo-600' : 'bg-slate-800',
+    };
+    setUser(newUser);
+    persist(newUser);
+    return true;
+  };
+
+  const logout = () => {
+    setUser(null);
+    persist(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, isAuthenticated, login, register, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
+  return context;
+};
